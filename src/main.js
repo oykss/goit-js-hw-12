@@ -39,9 +39,9 @@ form.addEventListener('submit', event => {
   wrapPhotos.innerHTML = '';
 
   const inputValue = document.querySelector('input').value.trim();
+  btnMore.classList.remove('btm-more-active');
 
   if (!inputValue) {
-    btnMore.classList.remove('btm-more-active');
     iziToast.error({
       message: 'Sorry, there are no images matching your search query. Please, try again!',
       ...options,
@@ -71,11 +71,11 @@ function processingPhoto(value = inputValue, pageNum = 1) {
           wrapPhotos.innerHTML = renderPhotos(photos);
           lightBoxPhotos.refresh();
           showCards();
+          btnMore.classList.add('btm-more-active');
         }
       })
       .finally(() => {
         loader.classList.add('visually-hidden');
-        btnMore.classList.add('btm-more-active');
       });
   } else {
     getPhotos(inputValue, pageNum)
